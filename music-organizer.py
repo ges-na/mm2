@@ -53,6 +53,7 @@ class MusicMachine:
             self.keep_going = False
 
     def set_input_directory(self):
+        print("  Music Machine assumes that your top-level directory generally contains artist sub-directories containing album subdirectories containing tracks.\n")
         self.input_directory = input("  Please choose your input directory--this is where you want to copy files from: ")
         self.check_input_dir(self.input_directory)
 
@@ -96,7 +97,22 @@ class MusicMachine:
         pass
 
     def start_music_machine(self, dry_run=True):
-        print("Music Machine would start if it were written.")
+        # TODO: this will traverse directory structure and instantiate File/Track
+        folder_contents = [x for x in os.walk(self.input_directory)]
+        print(folder_contents)
+            # root = os.path.relpath(top_folder, self.input_directory)
+            # split_root = root.split(os.sep)
+            # array_length = len(split_root)
+            # # This deals with presumable artist/album formatted stuff; this is very hacky
+            # if array_length == 2:
+            #     print(f"working on {top_folder}")
+            #     for filename in tracks:
+            #         file_instance = File()
+            #         file_instance.handle_file(filename)
+
+            # # Plenty of artist folders just have tracks in them. Need to figure out how to get album name, if possible, or at least copy and flag.
+        # # Need to account for dry_run True/False
+        # print("Music Machine would start if it were written.")
 
     def logging(self):
         # idk how logging works
@@ -104,6 +120,9 @@ class MusicMachine:
 
 
 class File:
+
+    def handle_file(self, filename):
+        print(f"handling {filename}")
 
     def check_filetype(self):
         pass
